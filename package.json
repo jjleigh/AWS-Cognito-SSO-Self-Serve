@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/font": "^7.1.96",
     "@vue/compat": "^3.2.41",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
