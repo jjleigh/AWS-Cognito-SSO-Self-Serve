@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="pa-6">
     <v-card-title class="text-left settings-title">
       <h3 class="text-h3">Settings</h3>
     </v-card-title>

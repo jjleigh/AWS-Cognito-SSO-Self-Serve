@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="pa-6">
       <div class="users-tab-container">
         Users
       </div>

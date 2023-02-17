@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main class="pa-6">
     <p>This is Home</p>
   </v-main>
 </template>

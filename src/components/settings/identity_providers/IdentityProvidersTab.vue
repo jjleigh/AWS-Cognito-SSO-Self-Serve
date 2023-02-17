@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="pa-6">
       <div class="idp-tab-container">
         IdentityProvidersTab
       </div>
