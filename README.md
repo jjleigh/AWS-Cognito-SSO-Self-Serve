@@ -12,8 +12,10 @@ This project serves as a template for anyone wanting to add a self service inter
 - CDK template for deploying infrastructure for tenant onboarding
 
 ## Architecture
+Will continute to update this. First starting with the UI and the related infrastructure.
 
- TBD
+<img width="942" alt="Screen Shot 2023-02-22 at 10 48 16 AM" src="https://user-images.githubusercontent.com/7748458/220733994-25338a4d-a952-4248-88bc-d229e0b45b8c.png">
+
 
 ## Deployment
 
