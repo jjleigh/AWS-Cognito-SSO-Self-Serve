@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-6">
     <v-card-title class="text-left settings-title">
-      <h3 class="text-h3">Settings</h3>
+      <h4 class="text-h4">Settings</h4>
     </v-card-title>
     <v-tabs v-model="activeTabIndex" bg-color="transparent"
       color="blue-darken-3"
@@ -28,9 +28,9 @@
   </v-card>
 </template>
   
-  <script>
-  import IdentityProvidersTab from './identity_providers/IdentityProvidersTab'
-  import UsersTab from './users/UsersTab'
+<script>
+  import IdentityProvidersTab from './identity_providers/IdentityProvidersTab';
+  import UsersTab from './users/UsersTab';
 
   export default {
     name: 'SettingsPage',
@@ -38,6 +38,7 @@
       IdentityProvidersTab,
       UsersTab,
     },
+    
     props: {
       route: Object
     },
@@ -53,6 +54,44 @@
       group () {
         this.drawer = false
       },
+    },
+
+    methods: {
+      async readFileAsync(file) {
+        return new Promise((resolve, reject) => {
+          let reader = new FileReader();
+
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+
+          reader.onerror = reject;
+
+          reader.readAsText(file);
+        });
+      },
+      async copyText(myText) {
+        try {
+          await navigator.clipboard.writeText(myText);
+          this.$toastr.success(`copied`)
+        } catch($e) {
+          this.$toastr.error(`failed to copy`)
+        }
+      },
+      async getUserpoolInfo() {
+        this.userpoolId = 'userPoolId';
+        this.entityId = `urn:amazon:cognito:sp:${this.userpoolId}`;
+        this.region = 'us-east-1';
+        this.poolClientId = 'userpoolClientId';
+        this.responseType = 'code';
+        this.redirectUrl = 'localhost:8080';
+        this.ssoScope = 'email,phone,openid,profile';
+        this.acsURL = `https://example.auth.us-east-1.amazoncognito.com/saml2/idpresponse`;
+      },
+      
+    },
+    async mounted() {
+      await this.getUserpoolInfo();
     }
   }
   </script>
