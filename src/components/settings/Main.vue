@@ -1,8 +1,36 @@
 <template>
   <v-card class="pa-6">
     <v-card-title class="text-left settings-title">
-      <h4 class="text-h4">Settings</h4>
+      <v-breadcrumbs>Settings</v-breadcrumbs>
     </v-card-title>
+    <v-container class="mb-12">
+      <div class="mb-14">
+        <span class="admin-settings color_top service-provider-details-heading">Service Provider Details</span>
+      </div>
+      <div class="mb-30">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td class="mr-20">Entity ID: </td>
+              <td class="ml-70">{{entityId}}</td>
+              <td class="copy-text pl-70 copy-entity-id" @click="copyText(entityId)">
+                <i class="fa fa-copy" aria-hidden="true"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="mr-20">ACS URL: </td>
+              <td class="ml-70">{{acsURL}}</td>
+              <td class="copy-text pl-70 copy-acs" @click="copyText(acsURL)">
+                <i class="fa fa-copy"></i>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </v-container>
+    
     <v-tabs v-model="activeTabIndex" bg-color="transparent"
       color="blue-darken-3"
       grow
@@ -45,6 +73,8 @@
     data: () => ({
       drawer: false,
       activeTabIndex: 0,
+      entityId: '',
+      acsURL: '',
       tabs: [
         { title: 'Identity Providers', component: 'IdentityProvidersTab' },
         { title: 'Users', component: 'UsersTab' }
