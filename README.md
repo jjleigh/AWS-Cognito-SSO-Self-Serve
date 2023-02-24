@@ -23,7 +23,13 @@ Will continute to update this. First starting with the UI and the related infras
 
 ## UI
 
- TBD
+### User listings page
+
+<img width="1470" alt="Screen Shot 2023-02-23 at 4 22 23 PM" src="https://user-images.githubusercontent.com/7748458/221062663-1f5030e0-dc73-4e03-8abc-0faf8b852863.png">
+
+### User details page
+
+<img width="1470" alt="Screen Shot 2023-02-23 at 4 22 37 PM" src="https://user-images.githubusercontent.com/7748458/221062674-ba7219ff-c236-43f3-af28-06dc85f10dd8.png">
 
 ## Local development
 ```
