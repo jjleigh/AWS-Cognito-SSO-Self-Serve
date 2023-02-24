@@ -1,13 +1,23 @@
 <template>
     <v-card class="pa-6">
       <div class="users-tab-container">
-        <UserListing :users="users"/>
+        <UserListing 
+          :users="users" 
+          @toggleUserDisplay="handleToggleUserDisplay"
+          v-show="!user.Username"
+        />
+        <UserDetails
+          :user="user" 
+          @toggleUserDisplay="handleToggleUserDisplay"
+          v-show="user.Username"
+        />
       </div>
     </v-card>
   </template>
   
   <script>
   import UserListing from './UserListing'
+  import UserDetails from './UserDetails'
   // import {
   //   getUser,
   //   listUsers,
@@ -15,7 +25,6 @@
   //   enableUser,
   // } from '../../../services/AWSCognitoService.js';
   import {
-    getUser,
     disableUser,
     enableUser,
   } from '../../../services/AWSCognitoService.js';
@@ -24,11 +33,11 @@
     name: 'UsersTab',
     components: {
       UserListing,
+      UserDetails
     },
     data: function() {
       return {
         users: [],
-        displayUserAttributes: false,
         user: {
           Username: null,
           UserStatus: null,
@@ -40,8 +49,9 @@
       }
     },
     methods: {
-      async toggleUserDisplay(username) {
-        if (this.displayUserAttributes) {
+      async handleToggleUserDisplay(username) {
+        console.log('username', username)
+        if (this.user.Username) {
           this.user = {
             Username: null,
             UserStatus: null,
@@ -50,18 +60,28 @@
             UserCreateDate: null,
             UserLastModifiedDate: null,
           };
-          this.displayUserAttributes = false;
+          this.selectedUser = false;
         } else {
-          const results = await getUser(this.userpoolId, username, this.region);
+          // const results = await getUser(this.userpoolId, username, this.region);
+          // this.user = {
+          //   Username: results.Username,
+          //   UserStatus: results.UserStatus,
+          //   Email: results.UserAttributes.find(atr => atr.Name === 'email').Value,
+          //   Enabled: results.Enabled,
+          //   UserCreateDate: results.UserCreateDate,
+          //   UserLastModifiedDate: results.UserLastModifiedDate,
+          // };
+
           this.user = {
-            Username: results.Username,
-            UserStatus: results.UserStatus,
-            Email: results.UserAttributes.find(atr => atr.Name === 'email').Value,
-            Enabled: results.Enabled,
-            UserCreateDate: results.UserCreateDate,
-            UserLastModifiedDate: results.UserLastModifiedDate,
-          };
-          this.displayUserAttributes = true;
+            Username: 'Jane_Doe',
+            UserStatus: 'EXTERNAL',
+            Email: 'jane_doe@example.com',
+            Enabled: true,
+            UserCreateDate: 'today',
+            UserLastModifiedDate: 'today',
+          }
+
+          this.selectedUser = true;
         }
       },
       async fetchUsers() {
@@ -94,7 +114,7 @@
           }
         ]
       },
-      async disableCognitoUser() {
+      async handleDisableCognitoUser() {
         await disableUser(
           this.userpoolId, 
           this.user.Username, 
@@ -110,7 +130,7 @@
           Enabled: false,
         };
       },
-      async enableCognitoUser() {
+      async handleEnableCognitoUser() {
         await enableUser(
           this.userpoolId, 
           this.user.Username, 

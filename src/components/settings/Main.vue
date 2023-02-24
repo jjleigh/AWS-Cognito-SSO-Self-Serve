@@ -3,34 +3,7 @@
     <v-card-title class="text-left settings-title">
       <v-breadcrumbs>Settings</v-breadcrumbs>
     </v-card-title>
-    <v-container class="mb-12">
-      <div class="mb-14">
-        <span class="admin-settings color_top service-provider-details-heading">Service Provider Details</span>
-      </div>
-      <div class="mb-30">
-        <div class="table-responsive">
-          <table class="table">
-            <tbody>
-            <tr>
-              <td class="mr-20">Entity ID: </td>
-              <td class="ml-70">{{entityId}}</td>
-              <td class="copy-text pl-70 copy-entity-id" @click="copyText(entityId)">
-                <i class="fa fa-copy" aria-hidden="true"></i>
-              </td>
-            </tr>
-            <tr>
-              <td class="mr-20">ACS URL: </td>
-              <td class="ml-70">{{acsURL}}</td>
-              <td class="copy-text pl-70 copy-acs" @click="copyText(acsURL)">
-                <i class="fa fa-copy"></i>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </v-container>
-    
+    <ServiceProviderDetails @copyText="handleCopyText" :entityId="entityId" :acsURL="acsURL"/>
     <v-tabs v-model="activeTabIndex" bg-color="transparent"
       color="blue-darken-3"
       grow
@@ -59,10 +32,12 @@
 <script>
   import IdentityProvidersTab from './identity_providers/IdentityProvidersTab';
   import UsersTab from './users/UsersTab';
+  import ServiceProviderDetails from './ServiceProviderDetails';
 
   export default {
     name: 'SettingsPage',
     components: {
+      ServiceProviderDetails,
       IdentityProvidersTab,
       UsersTab,
     },
@@ -85,7 +60,6 @@
         this.drawer = false
       },
     },
-
     methods: {
       async readFileAsync(file) {
         return new Promise((resolve, reject) => {
@@ -100,7 +74,7 @@
           reader.readAsText(file);
         });
       },
-      async copyText(myText) {
+      async handleCopyText(myText) {
         try {
           await navigator.clipboard.writeText(myText);
           this.$toastr.success(`copied`)
@@ -118,7 +92,6 @@
         this.ssoScope = 'email,phone,openid,profile';
         this.acsURL = `https://example.auth.us-east-1.amazoncognito.com/saml2/idpresponse`;
       },
-      
     },
     async mounted() {
       await this.getUserpoolInfo();

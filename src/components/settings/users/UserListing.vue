@@ -1,19 +1,14 @@
 <template>
     <v-main>
         <div class="contents white-bg p-40">
-            <div class="row pb-30">
-                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                    <i class="fa fa-times close fs-20" @click="toggleUserDisplay(user.Username)"></i>
-                </div>
-            </div>
             <v-table>
                 <thead>
                     <tr>
-                        <th class="fs-10 pl-20 username">Username</th>
-                        <th class="xs-none fs-10 enabled">Enabled</th>
-                        <th class="xs-none fs-10 account-status">Account Status</th>
-                        <th class="fs-10 updated">Updated</th>
-                        <th class="fs-10 created">Created</th>
+                        <th class="pl-20 username">Username</th>
+                        <th class="enabled">Enabled</th>
+                        <th class="account-status">Account Status</th>
+                        <th class="updated">Updated</th>
+                        <th class="created">Created</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +32,11 @@
 export default {
     name: 'UserListing',
     props: ['users'],
+    methods: {
+        toggleUserDisplay(username) {
+            this.$emit('toggleUserDisplay', username);
+        }
+    },
     async mounted() {
       console.log('UserTab', this.users)
     }
