@@ -57,7 +57,7 @@
             }
         },
         async mounted() {
-            console.log('UserDetails', this.user)
+            // console.log('UserDetails', this.user)
         }
     }
 </script>

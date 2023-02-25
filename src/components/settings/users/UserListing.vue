@@ -38,7 +38,7 @@ export default {
         }
     },
     async mounted() {
-      console.log('UserTab', this.users)
+    //   console.log('UserTab', this.users)
     }
 }
 </script>
