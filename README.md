@@ -34,6 +34,8 @@ Will continute to update this. First starting with the UI and the related infras
 #### Identity providers management tab
 <img width="1468" alt="Screen Shot 2023-02-24 at 11 11 12 PM" src="https://user-images.githubusercontent.com/7748458/221344910-99321587-866c-4019-be20-1aaf1b8a7705.png">
 <img width="1465" alt="Screen Shot 2023-02-24 at 11 11 24 PM" src="https://user-images.githubusercontent.com/7748458/221344912-5c9948d2-baf5-4c40-bfee-37cf0c088404.png">
+<img width="1469" alt="Screen Shot 2023-02-25 at 2 52 09 PM" src="https://user-images.githubusercontent.com/7748458/221383717-3b981e26-4841-4472-a14c-dbd90be2284c.png">
+
 
 ## Local development
 ```
