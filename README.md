@@ -23,13 +23,17 @@ Will continute to update this. First starting with the UI and the related infras
 
 ## UI
 
-### User listings page
+#### User listings page
 
 <img width="1470" alt="Screen Shot 2023-02-23 at 4 22 23 PM" src="https://user-images.githubusercontent.com/7748458/221062663-1f5030e0-dc73-4e03-8abc-0faf8b852863.png">
 
-### User details page
+#### User details page
 
 <img width="1470" alt="Screen Shot 2023-02-23 at 4 22 37 PM" src="https://user-images.githubusercontent.com/7748458/221062674-ba7219ff-c236-43f3-af28-06dc85f10dd8.png">
+
+#### Identity providers management tab
+<img width="1468" alt="Screen Shot 2023-02-24 at 11 11 12 PM" src="https://user-images.githubusercontent.com/7748458/221344910-99321587-866c-4019-be20-1aaf1b8a7705.png">
+<img width="1465" alt="Screen Shot 2023-02-24 at 11 11 24 PM" src="https://user-images.githubusercontent.com/7748458/221344912-5c9948d2-baf5-4c40-bfee-37cf0c088404.png">
 
 ## Local development
 ```
