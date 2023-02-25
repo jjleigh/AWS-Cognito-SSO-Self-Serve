@@ -18,7 +18,7 @@
               :key="index"
           >
             <td class="text-left">{{idp.providerType}}:{{idp.providerName}}</td>
-            <td class="text-left actions" @click="toggleEditForm(idp.providerName)">
+            <td class="text-left actions" @click="toggleEditMode(idp.providerName)">
               <v-icon class="mdi mdi-pencil pencil" aria-hidden="true"></v-icon>
             </td>
             <td class="text-left actions" @click="setproviderToDelete(idp.providerName); dialog = true">
@@ -64,6 +64,10 @@
       setproviderToDelete(provider) {
         this.providerToDelete = provider;
       },
+      toggleEditMode(provider){
+        console.log('toggleEditMode')
+        this.$emit('toggleEditMode', provider);
+      }
     },
     async mounted() {
       console.log('IdentityProviderListing', this.identityProviders)
