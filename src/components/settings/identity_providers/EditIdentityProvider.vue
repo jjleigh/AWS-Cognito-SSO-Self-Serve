@@ -29,6 +29,13 @@
         ></v-text-field>
         <v-btn
           class="me-4"
+          type="flat"
+          @click="toggleEditMode()"
+        >
+          Cancel
+        </v-btn>
+        <v-btn
+          class="me-4"
           color="info"
           type="submit"
           @click="toggleEditMode()"
@@ -56,10 +63,13 @@
         this.$emit('updateProvider', this.form.identityProvider);
       },
       toggleEditMode() {
-        console.log('edit form')
-        this.$emit('toggleEditMode', this.form.identityProvider);
+        console.log('cancel edit')
+        this.$emit('toggleEditMode');
       },
     },
+    mounted() {
+      console.log('EditIdentityProvider', this.identityProvider);
+    }
   };
 </script>
 

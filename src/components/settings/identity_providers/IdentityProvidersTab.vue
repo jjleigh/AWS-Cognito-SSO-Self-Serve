@@ -18,6 +18,7 @@
       <EditIdentityProvider 
         v-show="editProviderMode"
         :identityProvider="identityProvider"
+        @updatelProvider="handleUpdateProvider"
         @toggleEditMode="handleToggleEditMode"
       ></EditIdentityProvider>
     </div>
@@ -132,9 +133,18 @@ export default {
             metadataURL: 'https://example.com'
           },
         }
+      } else {
+        this.identityProvider = {
+          providerName: undefined,
+          providerType: undefined,
+          providerDetails: {
+            metadataFile: undefined,
+            metadataURL: undefined
+          }
+        }
       }
-      console.log('IdentityProvidersTab editProviderMode', this.editProviderMode)
       this.editProviderMode = !this.editProviderMode;
+      console.log('IdentityProvidersTab editProviderMode', this.editProviderMode, this.identityProvider)
     },
     onMetadataDocumentChange(e) {
       const files = e.target.files || e.dataTransfere.files;
