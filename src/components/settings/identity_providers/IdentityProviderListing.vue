@@ -1,5 +1,8 @@
 <template>
-  <v-container class="pa-6">
+  <v-container>
+    <div class="mb-8">
+      <span class="font-weight-bold">Identity Provider Listing</span>
+    </div>
     <div class="contents white-bg p-40">
       <v-table>
         <thead>

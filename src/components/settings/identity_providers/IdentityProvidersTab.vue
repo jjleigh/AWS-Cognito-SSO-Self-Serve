@@ -1,17 +1,22 @@
 <template>
-    <v-card class="pa-6">
-      <div class="idp-tab-container">
-        <IdentityProviderListing 
-          :identityProviders="identityProviders" 
-          @deleteProvider="handleDeleteProvider"
-        ></IdentityProviderListing>
-      </div>
-    </v-card>
-  </template>
+  <v-card class="pa-6">
+    <div class="idp-tab-container">
+      <ConfigureIdentityProvider class="mb-6" @createProvider="handleCreateProvider"></ConfigureIdentityProvider>
+      <v-divider></v-divider>
+      <IdentityProviderListing
+        class="mt-6"
+        :identityProviders="identityProviders" 
+        @deleteProvider="handleDeleteProvider"
+      ></IdentityProviderListing>
+    </div>
+  </v-card>
+</template>
   
   <script>
   import * as R from 'ramda';
   import IdentityProviderListing from './IdentityProviderListing'
+  import ConfigureIdentityProvider from './ConfigureIdentityProvider'
+
   import {
     getIdentityProvider,
     createIdentityProvider,
@@ -33,7 +38,8 @@
   export default {
     name: 'IdentityProvidersTab',
     components: {
-      IdentityProviderListing
+      IdentityProviderListing,
+      ConfigureIdentityProvider
     },
     data: function() {
       return {
@@ -42,8 +48,8 @@
           providerName: undefined,
           providerType: '',
           providerDetails: {
-            MetadataFile: undefined,
-            MetadataURL: undefined
+            metadataFile: undefined,
+            metadataURL: undefined
           },
         },
       }
@@ -132,13 +138,13 @@
             providerName: 'Azure AD',
             providerType: 'SAML',
             providerDetails: {
-              MetadataFile: undefined,
-              MetadataURL: undefined
+              metadataFile: undefined,
+              metadataURL: undefined
             },
           }
         ]
       },
-      async createProvider() {
+      async handleCreateProvider() {
         let details;
         if(this.identityProvier.providerDetails.MetadataFile) {
           const file = await this.readFileAsync(this.identityProvier.providerDetails.MetadataFile);
