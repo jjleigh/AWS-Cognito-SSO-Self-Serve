@@ -6,24 +6,24 @@
     <div>
       <form @submit.prevent="createProvider">
         <v-text-field
-          v-model="identityProvier.providerName"
+          v-model="identityProvider.providerName"
           label="Provider Name"
         ></v-text-field>
         <v-select
-          v-model="identityProvier.providerType"
+          v-model="identityProvider.providerType"
           :items="providerTypes"
           label="Select Provider Type"
         ></v-select>
         <v-file-input
           class="mb-6"
           accept="image/*"
-          v-model="identityProvier.metadataFile"
+          v-model="identityProvider.metadataFile"
           label="Metadata document"
         ></v-file-input>
         <span>------- Or -------</span>
         <v-text-field
           class="mt-6"
-          v-model="identityProvier.metadataURL"
+          v-model="identityProvider.metadataURL"
           label="Metadata URL"
         ></v-text-field>
         <v-btn
@@ -44,7 +44,7 @@
     data() {
       return {
         providerTypes: ['SAML'],
-        identityProvier: {
+        identityProvider: {
           providerName: undefined,
           providerType: '',
           providerDetails: {
@@ -55,8 +55,8 @@
       };
     },
     methods: {
-      createProvider(identityProvier) {
-        this.$emit('createProvider', identityProvier);
+      createProvider(identityProvider) {
+        this.$emit('createProvider', identityProvider);
       }
     }
   }
