@@ -3,10 +3,10 @@
     <div class="idp-tab-container">
       <ConfigureIdentityProvider class="mb-6" @createProvider="handleCreateProvider"></ConfigureIdentityProvider>
       <v-divider></v-divider>
-      <!-- <EnableIdentityProvider 
+      <EnableIdentityProvider 
         :userpoolClient="userpoolClient" 
         @update:userpoolClient="userpoolClient = $event"
-      ></EnableIdentityProvider> -->
+      ></EnableIdentityProvider>
       <v-divider></v-divider>
       <IdentityProviderListing
         class="mt-6"
@@ -29,7 +29,7 @@
   import * as R from 'ramda';
   import IdentityProviderListing from './IdentityProviderListing'
   import ConfigureIdentityProvider from './ConfigureIdentityProvider'
-  // import EnableIdentityProvider from './EnableIdentityProvider'
+  import EnableIdentityProvider from './EnableIdentityProvider'
   import EditIdentityProvider from './EditIdentityProvider'
 
   import {
@@ -55,7 +55,7 @@ export default {
   components: {
     IdentityProviderListing,
     ConfigureIdentityProvider,
-    // EnableIdentityProvider,
+    EnableIdentityProvider,
     EditIdentityProvider
   },
   data: function() {
