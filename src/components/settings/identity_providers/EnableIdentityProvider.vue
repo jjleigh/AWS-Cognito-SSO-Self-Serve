@@ -14,8 +14,10 @@
           <form @submit.prevent="updateClient">
             <div class="mr-25" v-for="provider in configuredProviders" :key="provider" style="display: inline-block">
               <v-checkbox
-              :value="isSelected(provider)"
-              :label="provider !== 'COGNITO' ? provider : ' and Password'"
+              :value="provider"
+              v-model="selectedProviders"
+              :checked="isSelected(provider)"
+              :label="provider !== 'COGNITO' ? provider : 'Email and Password'"
               @change="onChange($event, provider)"
               >
               </v-checkbox>
@@ -44,7 +46,6 @@
       configuredProviders: [],
       selectedProviders: []
     }),
-    
     computed: {
       isSelected() {
         return (provider) => {
@@ -58,12 +59,13 @@
         this.$emit('updateClient', client);
       },
       allProvidersActive() {
-        let configureddIdentityProviders = this.configuredProviders.sort();
+        let configuredIdentityProviders = this.configuredProviders.sort();
         let enabledIdentityProviders = this.selectedProviders.sort()
 
-        return configureddIdentityProviders.every((provider, index) => provider === enabledIdentityProviders[index]);
+        return configuredIdentityProviders.every((provider, index) => provider === enabledIdentityProviders[index]);
       },
       onChange(event, provider) {
+        console.log('onChange',event, provider);
         if (event.target.checked) {
           this.selectedProviders.push(provider);
         } else {
@@ -71,6 +73,7 @@
         }
       },
       toggleSelectAll() {
+        console.log('toggle')
         if (this.allProvidersActive()) {
           this.selectAll = true;
         } else {
