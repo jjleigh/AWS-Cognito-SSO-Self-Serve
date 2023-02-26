@@ -46,7 +46,6 @@
     }),
     watch: {
       selectedProviders: function(newSelectedProviders) {
-        console.log('watching', newSelectedProviders)
         if (newSelectedProviders.length === this.configuredProviders.length) {
           this.allSelected = true;
         } else {
@@ -82,7 +81,6 @@
       this.configuredProviders.push("COGNITO");
 
       this.selectedProviders = [...this.userpoolClient.enabledIdentityProviders];
-      // await this.fetchUserpoolClient();
     }
   }
 </script>

@@ -18,15 +18,11 @@
   <script>
   import UserListing from './UserListing'
   import UserDetails from './UserDetails'
-  // import {
-  //   getUser,
-  //   listUsers,
-  //   disableUser,
-  //   enableUser,
-  // } from '../../../services/AWSCognitoService.js';
   import {
     disableUser,
     enableUser,
+    //   getUser,
+    //   listUsers,
   } from '../../../services/AWSCognitoService.js';
 
   export default {
@@ -120,8 +116,7 @@
           this.user.Username, 
           this.region
         ).then(resp => {
-          this.$toastr.success(`User ${this.user.Username} successfully disabled`);
-          console.log('resp', resp);
+          this.$toastr.success(`User ${this.user.Username} successfully disabled`, resp);
         }).catch(e => {
           this.$toastr.error(`User ${this.user.Username} failed to disable: `, e);
         });
@@ -136,8 +131,7 @@
           this.user.Username, 
           this.region
         ).then(resp => {
-          this.$toastr.success(`User ${this.user.Username} successfully enabled`);
-          console.log('resp', resp);
+          this.$toastr.success(`User ${this.user.Username} successfully enabled`, resp);
         }).catch(e => {
           this.$toastr.error(`User ${this.user.Username} failed to enable: `, e);
         });
@@ -149,7 +143,6 @@
     },
     async mounted() {
       await this.fetchUsers();
-      console.log('yo', this.users)
     }
   }
   </script>

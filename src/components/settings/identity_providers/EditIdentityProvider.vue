@@ -63,13 +63,9 @@
         this.$emit('updateProvider', this.form.identityProvider);
       },
       toggleEditMode() {
-        console.log('cancel edit')
         this.$emit('toggleEditMode');
       },
     },
-    mounted() {
-      console.log('EditIdentityProvider', this.identityProvider);
-    }
   };
 </script>
 

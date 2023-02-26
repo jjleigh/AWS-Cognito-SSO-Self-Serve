@@ -56,9 +56,6 @@
                 this.$emit('toggleUserDisplay', username);
             }
         },
-        async mounted() {
-            // console.log('UserDetails', this.user)
-        }
     }
 </script>
   

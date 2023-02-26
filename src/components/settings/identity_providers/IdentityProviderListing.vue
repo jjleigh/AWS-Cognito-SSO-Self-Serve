@@ -65,12 +65,8 @@
         this.providerToDelete = provider;
       },
       toggleEditMode(provider){
-        console.log('toggleEditMode')
         this.$emit('toggleEditMode', provider);
       }
-    },
-    async mounted() {
-      console.log('IdentityProviderListing', this.identityProviders)
     }
   }
 </script>

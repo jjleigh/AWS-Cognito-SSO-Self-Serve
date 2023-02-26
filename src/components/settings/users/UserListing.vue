@@ -36,9 +36,6 @@ export default {
         toggleUserDisplay(username) {
             this.$emit('toggleUserDisplay', username);
         }
-    },
-    async mounted() {
-    //   console.log('UserTab', this.users)
     }
 }
 </script>

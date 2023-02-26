@@ -26,7 +26,6 @@
 </template>
   
   <script>
-  import * as R from 'ramda';
   import IdentityProviderListing from './IdentityProviderListing'
   import ConfigureIdentityProvider from './ConfigureIdentityProvider'
   import EnableIdentityProvider from './EnableIdentityProvider'
@@ -38,18 +37,9 @@
     deleteIdentityProvider,
     updateIdentityProvider,
     updateUserpoolClient,
+    // listIdentityProviders
     // getUserpoolClient,
   } from '../../../services/AWSCognitoService.js';
-  // import {
-  //   getIdentityProvider,
-  //   listIdentityProviders,
-  //   createIdentityProvider,
-  //   deleteIdentityProvider,
-  //   updateIdentityProvider,
-  //   updateUserpoolClient,
-  //   getUserpoolClient,
-  // } from '../../../services/AWSCognitoService.js';
-
 export default {
   name: 'IdentityProvidersTab',
   components: {
@@ -77,34 +67,7 @@ export default {
     }
   },
   methods: {
-    allProvidersActive() {
-      const allowedIdentityProviders = new Set(this.userpoolClient.allowedIdentityProviders)
-      const supportedIdentityProviders =  new Set(this.userpoolClient.supportedIdentityProviders)
-      const allSupported = R.equals(allowedIdentityProviders, supportedIdentityProviders);
-      return allSupported;
-    },
-    onChangeCheckbox(e, providerName) {
-      const unselected = !this.isActive(providerName);
-      console.log('event', e);
-
-      if(unselected) {
-        this.userpoolClient.supportedIdentityProviders.push(providerName);
-      } else {
-        const update = this.userpoolClient.supportedIdentityProviders.filter(item => item !== providerName);
-        this.userpoolClient.supportedIdentityProviders = update;
-      }
-    },
-    onChangeSelectAllCheckbox(e) {
-      const allSelected = this.allProvidersActive();
-      console.log('event', e);
-      if(allSelected) {
-        this.userpoolClient.supportedIdentityProviders = [];
-      } else {
-        this.userpoolClient.supportedIdentityProviders = this.userpoolClient.allowedIdentityProviders;
-      }
-    },
     setproviderToDelete(providerName = '') {
-      console.log('providerName', providerName);
       this.providerToDelete = providerName;
     },
     async handleToggleEditMode(providerName = undefined) {
@@ -144,7 +107,6 @@ export default {
         }
       }
       this.editProviderMode = !this.editProviderMode;
-      console.log('IdentityProvidersTab editProviderMode', this.editProviderMode, this.identityProvider)
     },
     onMetadataDocumentChange(e) {
       const files = e.target.files || e.dataTransfere.files;
@@ -221,9 +183,8 @@ export default {
         providerName, 
         this.region
       ).then(resp => {
-        this.$toastr.success(`Identity Provier ${providerName} successfully deleted`);
+        this.$toastr.success(`Identity Provier ${providerName} successfully deleted`, resp);
         this.identityProviders = this.identityProviders.filter(item => item.ProviderName !== providerName);
-        console.log('resp', resp);
       }).catch(e => {
         this.$toastr.error('Identity Provier ${providerName} failed to delete: ', e);
       });
@@ -245,8 +206,7 @@ export default {
         details, 
         this.region
       ).then(resp => {
-        this.$toastr.success(`Identity Provider ${this.identityProvider.providerName} successfully updated`);
-        console.log('resp', resp);
+        this.$toastr.success(`Identity Provider ${this.identityProvider.providerName} successfully updated`, resp);
       }).catch(e => {
         this.$toastr.error(`Identity Provider ${this.identityProvider.providerName} failed to update: `, e);
       });
@@ -270,8 +230,7 @@ export default {
         this.responseType,
         this.region
       ).then(resp => {
-        this.$toastr.success('Client successfully updated');
-        console.log('resp', resp)
+        this.$toastr.success('Client successfully updated', resp);
       }).catch(e => {
         this.$toastr.error('Client failed to update: ', e);
       });
@@ -287,12 +246,10 @@ export default {
   },
   beforeMount() {
     this.fetchUserpoolClient();
-    console.log('tab', this.userpoolClient)
   },
   async mounted() {
     await this.fetchIdentityProviders();
     // await this.fetchUserpoolClient();
-    // console.log('tab', this.userpoolClient)
     // this.userpoolClient.allowedIdentityProviders = this.identityProviders.map(idp => idp.ProviderName)
     // this.userpoolClient.allowedIdentityProviders.push("COGNITO")
   }
