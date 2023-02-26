@@ -1,15 +1,16 @@
 <template>
   <v-card class="pa-6">
     <div class="idp-tab-container">
-      <ConfigureIdentityProvider class="mb-6" @createProvider="handleCreateProvider"></ConfigureIdentityProvider>
+      <ConfigureIdentityProvider class="mt-8 mb-8" @createProvider="handleCreateProvider"></ConfigureIdentityProvider>
       <v-divider></v-divider>
       <EnableIdentityProvider
+        class="mt-8 mb-8"
         :userpoolClient="userpoolClient" 
         @updateClient="handleUpdateClient"
       ></EnableIdentityProvider>
       <v-divider></v-divider>
       <IdentityProviderListing
-        class="mt-6"
+        class="mt-8 mb-8"
         :identityProviders="identityProviders" 
         @deleteProvider="handleDeleteProvider"
         @toggleEditMode="handleToggleEditMode"
