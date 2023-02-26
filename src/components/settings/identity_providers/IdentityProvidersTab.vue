@@ -3,9 +3,9 @@
     <div class="idp-tab-container">
       <ConfigureIdentityProvider class="mb-6" @createProvider="handleCreateProvider"></ConfigureIdentityProvider>
       <v-divider></v-divider>
-      <EnableIdentityProvider 
+      <EnableIdentityProvider
         :userpoolClient="userpoolClient" 
-        @update:userpoolClient="userpoolClient = $event"
+        @updateClient="handleUpdateClient"
       ></EnableIdentityProvider>
       <v-divider></v-divider>
       <IdentityProviderListing
@@ -38,7 +38,7 @@
     deleteIdentityProvider,
     updateIdentityProvider,
     updateUserpoolClient,
-    getUserpoolClient,
+    // getUserpoolClient,
   } from '../../../services/AWSCognitoService.js';
   // import {
   //   getIdentityProvider,
@@ -71,8 +71,8 @@ export default {
         },
       },
       userpoolClient: {
-        supportedIdentityProviders: [],
-        allowedIdentityProviders: []
+        configureddIdentityProviders: [],
+        enabledIdentityProviders: []
       },
     }
   },
@@ -277,13 +277,22 @@ export default {
       });
     },
     async fetchUserpoolClient() {
-      const results = await getUserpoolClient(this.userpoolId, this.poolClientId, this.region);
-      this.userpoolClient.supportedIdentityProviders = results.UserPoolClient.SupportedIdentityProviders;
+      // const results = await getUserpoolClient(this.userpoolId, this.poolClientId, this.region);
+      // this.userpoolClient.supportedIdentityProviders = results.UserPoolClient.SupportedIdentityProviders;
+      this.userpoolClient =  {
+        configuredIdentityProviders: ['Okta', 'Azure AD', 'Ping Federate'],
+        enabledIdentityProviders: ['Okta', 'Azure AD']
+      }
     },
+  },
+  beforeMount() {
+    this.fetchUserpoolClient();
+    console.log('tab', this.userpoolClient)
   },
   async mounted() {
     await this.fetchIdentityProviders();
     // await this.fetchUserpoolClient();
+    // console.log('tab', this.userpoolClient)
     // this.userpoolClient.allowedIdentityProviders = this.identityProviders.map(idp => idp.ProviderName)
     // this.userpoolClient.allowedIdentityProviders.push("COGNITO")
   }

@@ -5,13 +5,31 @@
         <span class="font-weight-bold">Enabled Identity Providers</span>
       </div>
       <div>
-        <div>
+        <div style="display: inline-block">
           <v-checkbox
             v-model="selectAll"
             label="Select All"
-            :indeterminate="isIndeterminate"
-            @click="toggleSelectAll"
+            @change="toggleSelectAll"
           ></v-checkbox>
+          <form @submit.prevent="updateClient">
+            <div class="mr-25" v-for="provider in configuredProviders" :key="provider" style="display: inline-block">
+              <v-checkbox
+              :value="isSelected(provider)"
+              :label="provider !== 'COGNITO' ? provider : ' and Password'"
+              @change="onChange($event, provider)"
+              >
+              </v-checkbox>
+            </div>
+            <div>
+              <v-btn
+                class="me-4"
+                color="info"
+                type="submit"
+              >
+                Update Client
+              </v-btn>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -21,17 +39,31 @@
   export default {
     name: 'EnableIndentityProvider',
     props: ['userpoolClient'],
+    data: () => ({
+      selectAll: false,
+      configuredProviders: [],
+      selectedProviders: []
+    }),
+    
+    computed: {
+      isSelected() {
+        return (provider) => {
+          return this.selectedProviders.includes(provider);
+        };
+      }
+    },
     methods: {
-      updateClient(identityProvider) {
-        this.$emit('updateProvider', identityProvider);
-      },
-      isActive(providerName) {
-        return this.userpoolClient.supportedIdentityProviders.includes(providerName);
+      updateClient() {
+        let client = { SupportedIdentityProviders: this.selectedProviders };
+        this.$emit('updateClient', client);
       },
       allProvidersActive() {
-        return this.userpoolClient.allowedIdentityProviders.every(provider => provider.checked);
+        let configureddIdentityProviders = this.configuredProviders.sort();
+        let enabledIdentityProviders = this.selectedProviders.sort()
+
+        return configureddIdentityProviders.every((provider, index) => provider === enabledIdentityProviders[index]);
       },
-      onChangeCheckbox(event, provider) {
+      onChange(event, provider) {
         if (event.target.checked) {
           this.selectedProviders.push(provider);
         } else {
@@ -39,22 +71,26 @@
         }
       },
       toggleSelectAll() {
-        const updatedClient = { ...this.userpoolClient };
         if (this.allProvidersActive()) {
-          updatedClient.allowedIdentityProviders.forEach(provider => {
-            provider.checked = false;
-          });
-          this.selectedProviders = [];
+          this.selectAll = true;
         } else {
-          updatedClient.allowedIdentityProviders.forEach(provider => {
-            provider.checked = true;
-            if (!this.selectedProviders.includes(provider.name)) {
-              this.selectedProviders.push(provider.name);
-            }
-          });
+          this.selectAll = false;
         }
-        this.$emit('updateProvider', updatedClient);
       },
+    },
+    async mounted() {
+      console.log('userpoolClient', this.userpoolClient);
+      
+      this.configuredProviders = [...this.userpoolClient.configuredIdentityProviders];
+      this.configuredProviders.push("COGNITO");
+
+      this.selectedProviders = [...this.userpoolClient.enabledIdentityProviders];
+      this.selectAll = this.allProvidersActive();
+
+      console.log('configuredProviders', this.configuredProviders);
+      console.log('selectedProviders', this.selectedProviders);
+
+      // await this.fetchUserpoolClient();
     }
   }
 </script>
