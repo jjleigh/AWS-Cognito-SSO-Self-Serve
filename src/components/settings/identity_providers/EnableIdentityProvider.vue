@@ -8,7 +8,7 @@
         <div style="display: inline-block">
           <v-checkbox
             label="Select All"
-            :checked="allSelected"
+            v-model="allSelected"
             @change="toggleSelectAll"
           ></v-checkbox>
           <form @submit.prevent="updateClient">
@@ -44,6 +44,16 @@
       configuredProviders: [],
       selectedProviders: []
     }),
+    watch: {
+      selectedProviders: function(newSelectedProviders) {
+        console.log('watching', newSelectedProviders)
+        if (newSelectedProviders.length === this.configuredProviders.length) {
+          this.allSelected = true;
+        } else {
+          this.allSelected = false;
+        }
+      }
+    },
     computed: {
       isSelected() {
         return (provider) => {
