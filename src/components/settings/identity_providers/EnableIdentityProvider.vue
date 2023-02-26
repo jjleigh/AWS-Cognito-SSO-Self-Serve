@@ -82,17 +82,11 @@
       },
     },
     async mounted() {
-      console.log('userpoolClient', this.userpoolClient);
-      
       this.configuredProviders = [...this.userpoolClient.configuredIdentityProviders];
       this.configuredProviders.push("COGNITO");
 
       this.selectedProviders = [...this.userpoolClient.enabledIdentityProviders];
       this.selectAll = this.allProvidersActive();
-
-      console.log('configuredProviders', this.configuredProviders);
-      console.log('selectedProviders', this.selectedProviders);
-
       // await this.fetchUserpoolClient();
     }
   }
