@@ -7,9 +7,8 @@
       <div>
         <div style="display: inline-block">
           <v-checkbox
-            v-model="selectAll"
             label="Select All"
-            :checked="allProvidersSelected"
+            :checked="allSelected"
             @change="toggleSelectAll"
           ></v-checkbox>
           <form @submit.prevent="updateClient">
@@ -42,7 +41,6 @@
     name: 'EnableIndentityProvider',
     props: ['userpoolClient'],
     data: () => ({
-      selectAll: false,
       configuredProviders: [],
       selectedProviders: []
     }),
@@ -52,26 +50,20 @@
           return this.selectedProviders.includes(provider);
         };
       },
+      allSelected() {
+        return this.configuredProviders.length === this.selectedProviders.length;
+      },
     },
     methods: {
       updateClient() {
         let client = { SupportedIdentityProviders: this.selectedProviders };
         this.$emit('updateClient', client);
       },
-      allProvidersSelected() {
-        let configuredIdentityProviders = [...this.configuredProviders].sort();
-        let enabledIdentityProviders = [...this.selectedProviders].sort()
-        let result = configuredIdentityProviders.every((provider, index) => provider === enabledIdentityProviders[index]);
-
-        console.log('allProvidersSelected', result)
-        return result;
-      },
-      toggleSelectAll() {
-        console.log('toggle')
-        if (this.allProvidersSelected()) {
-          this.selectAll = true;
+      toggleSelectAll(event) {
+        if(event.target.checked) {
+          this.selectedProviders = [...this.configuredProviders];
         } else {
-          this.selectAll = false;
+          this.selectedProviders = [];
         }
       },
     },
@@ -80,8 +72,6 @@
       this.configuredProviders.push("COGNITO");
 
       this.selectedProviders = [...this.userpoolClient.enabledIdentityProviders];
-      this.selectAll = this.allProvidersSelected();
-      console.log('mounted selectedProviders', this.selectedProviders);
       // await this.fetchUserpoolClient();
     }
   }
