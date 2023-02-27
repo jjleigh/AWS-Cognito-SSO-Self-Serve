@@ -10,6 +10,6 @@ jobs:
       with:
         node-version: '18.x'
     - name: Install Dependencies
-      run: npm install
+      run: npm install --legacy-peer-deps
     - name: Run Jest
       run: npm run test
