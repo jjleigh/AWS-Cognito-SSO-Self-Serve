@@ -12,6 +12,7 @@
         v-for="(tab, index) in tabs"
         :key="tab.title"
         :value="index"
+        class="page-tabs"
       >
         {{ tab.title }}
       </v-tab>
@@ -39,22 +40,24 @@
     components: {
       ServiceProviderDetails,
       IdentityProvidersTab,
-      UsersTab,
+      UsersTab
     },
     
     props: {
       route: Object
     },
-    data: () => ({
-      drawer: false,
-      activeTabIndex: 0,
-      entityId: '',
-      acsURL: '',
-      tabs: [
-        { title: 'Identity Providers', component: 'IdentityProvidersTab' },
-        { title: 'Users', component: 'UsersTab' }
-      ],
-    }),
+    data: function(){
+      return {
+        drawer: false,
+        activeTabIndex: 0,
+        entityId: '',
+        acsURL: '',
+        tabs: [
+          { title: 'Identity Providers', component: IdentityProvidersTab, className: 'identity-providers-tab' },
+          { title: 'Users', component: UsersTab, className: 'users-tab' }
+        ],
+      }
+    },
     watch: {
       group () {
         this.drawer = false
@@ -77,9 +80,9 @@
       async handleCopyText(myText) {
         try {
           await navigator.clipboard.writeText(myText);
-          this.$toastr.success(`copied`)
+          // this.$toastr.success(`copied`)
         } catch($e) {
-          this.$toastr.error(`failed to copy`)
+          // this.$toastr.error(`failed to copy`)
         }
       },
       async getUserpoolInfo() {
@@ -95,6 +98,7 @@
     },
     async mounted() {
       await this.getUserpoolInfo();
+      // console.log('tabs', this.tabs)
     }
   }
   </script>

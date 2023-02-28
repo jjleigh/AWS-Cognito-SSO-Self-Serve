@@ -1,27 +1,28 @@
-import { mount } from '@vue/test-utils';
-import ServiceProviderDetails from '../../../components/settings/Main.vue';
+import { shallowMount } from '@vue/test-utils';
+import Main from '../../../../components/settings/Main.vue';
 
-describe('ServiceProviderDetails', () => {
-  it('renders entity ID and ACS URL', () => {
-    const entityId = 'entityId123';
-    const acsURL = 'https://example.com/acs';
-    const wrapper = mount(ServiceProviderDetails, {
-      propsData: { entityId, acsURL },
-    });
-    expect(wrapper.text()).toContain(entityId);
-    expect(wrapper.text()).toContain(acsURL);
+describe('Main.vue', () => {
+  it('renders correctly', () => {
+    const wrapper = shallowMount(Main);
+    expect(wrapper.exists()).toBe(true);
   });
 
-  it('emits copyText event when copy icon is clicked', async () => {
-    const entityId = 'entityId123';
-    const acsURL = 'https://example.com/acs';
-    const wrapper = mount(ServiceProviderDetails, {
-      propsData: { entityId, acsURL },
-    });
-    const copyIcon = wrapper.find('.content-copy');
-    await copyIcon.trigger('click');
-    expect(wrapper.emitted().copyText).toBeTruthy();
-    expect(wrapper.emitted().copyText[0][0]).toBe(entityId);
+  it('displays the correct tabs', async () => {
+    const wrapper = shallowMount(Main);
+
+    await wrapper.vm.$nextTick();
+
+
+    const tabs = wrapper.findAll('.page-tabs');
+    expect(tabs).toHaveLength(2);
+    expect(tabs.at(0).text()).toBe('Identity Providers');
+    expect(tabs.at(1).text()).toBe('Users');
+  });
+
+  it('loads userpool info on mount', async () => {
+    const wrapper = shallowMount(Main);
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.entityId).toBe('urn:amazon:cognito:sp:userPoolId');
+    expect(wrapper.vm.acsURL).toBe('https://example.auth.us-east-1.amazoncognito.com/saml2/idpresponse');
   });
 });
-
