@@ -8,8 +8,8 @@
             </div>
             <div >
                 <div class="mb-12 text-left">
-                    <v-btn variant="flat" color="info" v-show="user.Enabled" class="mr-15" @click="disableCognitoUser()">Disable user</v-btn>
-                    <v-btn variant="flat" color="info" v-show="!user.Enabled" class="mr-15" @click="enableCognitoUser()">Enable user</v-btn>
+                    <v-btn variant="flat" color="info" v-show="user.Enabled" class="mr-15 disable-user" @click="disableCognitoUser()">Disable user</v-btn>
+                    <v-btn variant="flat" color="info" v-show="!user.Enabled" class="mr-15 enable-user" @click="enableCognitoUser()">Enable user</v-btn>
                 </div>
                 <div class="mb-8 text-left">
                     <span class="font-weight-bold mr-8">Username</span>
