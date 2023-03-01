@@ -7,13 +7,13 @@
       <div class="mb-8 text-left entity-id">
         <span class="font-weight-bold mr-8">Entity ID: </span>
         <span class="ml-8">{{entityId}}</span>
-        <span class="ml-8"  @click="copyText(entityId)"><v-icon class="mdi mdi-content-copy content-copy" aria-hidden="true"></v-icon></span>
+        <span class="ml-8 copy-entity-id copy-text"  @click="copyText(entityId)"><v-icon class="mdi mdi-content-copy content-copy" aria-hidden="true"></v-icon></span>
       </div>
 
       <div class="mb-8 text-left acs-url">
         <span class="font-weight-bold mr-8">ACS URL: </span>
         <span class="ml-8">{{acsURL}}</span>
-        <span class="ml-8" @click="copyText(acsURL)"><v-icon class="mdi mdi-content-copy content-copy" aria-hidden="true"></v-icon></span>
+        <span class="ml-8 copy-acs-url copy-text" @click="copyText(acsURL)"><v-icon class="mdi mdi-content-copy content-copy" aria-hidden="true"></v-icon></span>
       </div>
     </div>
   </v-container>
@@ -25,7 +25,12 @@
     props: ['entityId', 'acsURL'],
     methods: {
       async copyText(myText) {
-        this.$emit('copyText', myText);
+        try {
+          await navigator.clipboard.writeText(myText);
+          // this.$toastr.success(`copied`)
+        } catch($e) {
+          // this.$toastr.error(`failed to copy`)
+        }
       },
     }
   }
@@ -33,5 +38,12 @@
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
+  .page-title {
+    color: #3c3c3c;
+  }
+
+  .copy-text {
+    cursor: pointer;
+  }
   </style>
   

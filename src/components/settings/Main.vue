@@ -3,7 +3,7 @@
     <v-card-title class="text-left settings-title">
       <v-breadcrumbs>Settings</v-breadcrumbs>
     </v-card-title>
-    <ServiceProviderDetails @copyText="handleCopyText" :entityId="entityId" :acsURL="acsURL"/>
+    <ServiceProviderDetails :entityId="entityId" :acsURL="acsURL"/>
     <v-tabs v-model="activeTabIndex" bg-color="transparent"
       color="blue-darken-3"
       grow
@@ -76,14 +76,6 @@
 
           reader.readAsText(file);
         });
-      },
-      async handleCopyText(myText) {
-        try {
-          await navigator.clipboard.writeText(myText);
-          // this.$toastr.success(`copied`)
-        } catch($e) {
-          // this.$toastr.error(`failed to copy`)
-        }
       },
       async getUserpoolInfo() {
         this.userpoolId = 'userPoolId';

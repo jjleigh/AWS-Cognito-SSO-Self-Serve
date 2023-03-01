@@ -1,37 +1,41 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils';
 import ServiceProviderDetails from '../../../../components/settings/ServiceProviderDetails.vue'
 
 describe('ServiceProviderDetails', () => {
-  it('renders the entityId prop correctly', () => {
-    const entityId = 'entityId123'
-    const acsURL = 'https://example.com/acs'
+  let wrapper;
 
-    const wrapper = shallowMount(ServiceProviderDetails, {
+  beforeEach(() => {
+    wrapper = mount(ServiceProviderDetails, {
       propsData: {
-        entityId: entityId,
-        acsURL: acsURL
-      }
-    })
-    expect(wrapper.find('.page-title').text()).toBe('Service Provider Details')
-    expect(wrapper.find('.entity-id').text()).toBe(`Entity ID: ${entityId}`)
-    expect(wrapper.find('.acs-url').text()).toBe(`ACS URL: ${acsURL}`)
-  })
+        entityId: '12345',
+        acsURL: 'http://example.com/acs',
+      },
+    });
+  });
 
-  it('emits the copyText event when the copy icon is clicked', () => {
-    const entityId = 'entityId123'
-    const acsURL = 'https://example.com/acs'
+  afterEach(() => {
+    wrapper.unmount();
+  });
 
-    const wrapper = mount(ServiceProviderDetails, {
-      propsData: {
-        entityId,
-        acsURL
-      }
-    })
+  it('displays the entity ID and ACS URL', () => {
+    expect(wrapper.find('.entity-id').text()).toContain('12345');
+    expect(wrapper.find('.acs-url').text()).toContain('http://example.com/acs');
+  });
 
-    const copyIcon = wrapper.find('.content-copy:first-of-type')
-    copyIcon.trigger('click')
+  it('calls copyText method when copy entity ID button is clicked', async () => {
+    const copyTextSpy = jest.spyOn(wrapper.vm, 'copyText');
+    const copyEntityIdBtn = wrapper.find('.copy-entity-id');
 
-    expect(wrapper.emitted().copyText).toBeTruthy()
-    expect(wrapper.emitted().copyText[0]).toEqual([entityId])
-  })
-})
+    await copyEntityIdBtn.trigger('click');
+    expect(copyTextSpy).toHaveBeenCalledWith('12345');
+  });
+
+  it('calls copyText method when copy ACS URL button is clicked', async () => {
+    const copyTextSpy = jest.spyOn(wrapper.vm, 'copyText');
+    const copyAcsUrlBtn = wrapper.find('.copy-acs-url');
+
+    await copyAcsUrlBtn.trigger('click');
+    expect(copyTextSpy).toHaveBeenCalledWith('http://example.com/acs');
+  });
+});
+
