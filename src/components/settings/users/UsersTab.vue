@@ -18,12 +18,12 @@
   <script>
   import UserListing from './UserListing'
   import UserDetails from './UserDetails'
-  import {
-    disableUser,
-    enableUser,
-    //   getUser,
-    //   listUsers,
-  } from '../../../services/AWSCognitoService.js';
+  // import {
+  //   disableUser,
+  //   enableUser,
+  //   //   getUser,
+  //   //   listUsers,
+  // } from '../../../services/AWSCognitoService.js';
 
   export default {
     name: 'UsersTab',
