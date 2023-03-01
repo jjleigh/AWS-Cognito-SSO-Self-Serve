@@ -83,6 +83,7 @@
       async fetchUsers() {
         // const results = await listUsers(this.userpoolId, this.region);
         // this.users = results.Users;
+        console.log('fetchUsers');
         this.users = [
           {
             Username: 'Jane_Doe',
@@ -110,38 +111,43 @@
           }
         ]
       },
-      async handleDisableCognitoUser() {
-        await disableUser(
-          this.userpoolId, 
-          this.user.Username, 
-          this.region
-        ).then(resp => {
-          this.$toastr.success(`User ${this.user.Username} successfully disabled`, resp);
-        }).catch(e => {
-          this.$toastr.error(`User ${this.user.Username} failed to disable: `, e);
-        });
-        this.user = {
-          ...this.user,
-          Enabled: false,
-        };
-      },
-      async handleEnableCognitoUser() {
-        await enableUser(
-          this.userpoolId, 
-          this.user.Username, 
-          this.region
-        ).then(resp => {
-          this.$toastr.success(`User ${this.user.Username} successfully enabled`, resp);
-        }).catch(e => {
-          this.$toastr.error(`User ${this.user.Username} failed to enable: `, e);
-        });
-        this.user = {
-          ...this.user,
-          Enabled: true,
-        };
-      },
+      // async handleDisableUser() {
+      //   await disableUser(
+      //     this.userpoolId, 
+      //     this.user.Username, 
+      //     this.region
+      //   ).then(resp => {
+      //     console.log('resp', resp);
+      //     // this.$toastr.success(`User ${this.user.Username} successfully disabled`, resp);
+      //   }).catch(e => {
+      //     console.log('e', e);
+      //     // this.$toastr.error(`User ${this.user.Username} failed to disable: `, e);
+      //   });
+      //   this.user = {
+      //     ...this.user,
+      //     Enabled: false,
+      //   };
+      // },
+      // async handleEnableUser() {
+      //   await enableUser(
+      //     this.userpoolId, 
+      //     this.user.Username, 
+      //     this.region
+      //   ).then(resp => {
+      //     // this.$toastr.success(`User ${this.user.Username} successfully enabled`, resp);
+      //     console.log('resp', resp);
+      //   }).catch(e => {
+      //     // this.$toastr.error(`User ${this.user.Username} failed to enable: `, e);
+      //     console.log('e', e);
+      //   });
+      //   this.user = {
+      //     ...this.user,
+      //     Enabled: true,
+      //   };
+      // },
     },
     async mounted() {
+      console.log('UsersTab mounted');
       await this.fetchUsers();
     }
   }
