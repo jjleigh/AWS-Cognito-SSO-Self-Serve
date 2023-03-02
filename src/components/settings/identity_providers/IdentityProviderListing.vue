@@ -18,10 +18,10 @@
               :key="index"
           >
             <td class="text-left">{{idp.providerType}}:{{idp.providerName}}</td>
-            <td class="text-left actions" @click="toggleEditMode(idp.providerName)">
+            <td class="text-left actions edit-button" @click="toggleEditMode(idp.providerName)">
               <v-icon class="mdi mdi-pencil pencil" aria-hidden="true"></v-icon>
             </td>
-            <td class="text-left actions" @click="setproviderToDelete(idp.providerName); dialog = true">
+            <td class="text-left actions open-delete-modal-button" @click="setproviderToDelete(idp.providerName); dialog = true">
               <v-icon class="mdi mdi-delete delete" aria-hidden="true"></v-icon>
             </td>
           </tr>
@@ -32,14 +32,15 @@
         <v-dialog
           v-model="dialog"
           width="auto"
+          class="delete-dialog"
         >
           <v-card>
             <v-card-text>
               Are you sure you want to delete this identity provider?
             </v-card-text>
             <v-card-actions>
-              <v-btn class="ml-8 mr-8" color="info" variant="text" small @click="dialog = false">Close Dialog</v-btn>
-              <v-btn class="ml-8" color="error" variant="flat" small @click="dialog = false; deleteProvider(providerToDelete)">Delete</v-btn>
+              <v-btn class="ml-8 mr-8 cancel-button" color="info" variant="text" small @click="dialog = false">Close Dialog</v-btn>
+              <v-btn class="ml-8 delete-button" color="error" variant="flat" small @click="dialog = false; deleteProvider(providerToDelete)">Delete</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
