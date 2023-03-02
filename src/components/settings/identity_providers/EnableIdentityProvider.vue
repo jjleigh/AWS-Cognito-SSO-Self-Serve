@@ -5,11 +5,12 @@
         <span class="font-weight-bold">Enabled Identity Providers</span>
       </div>
       <div>
-        <div style="display: inline-block">
+        <div style="display: inline-block" class="checkbox-container">
           <v-checkbox
             label="Select All"
             v-model="allSelected"
             @change="toggleSelectAll"
+            class="enable-provider-checkbox select-all-checkbox"
           ></v-checkbox>
           <form @submit.prevent="updateClient">
             <div class="mr-25" v-for="provider in configuredProviders" :key="provider" style="display: inline-block">
@@ -17,6 +18,8 @@
               :value="provider"
               v-model="selectedProviders"
               :checked="isSelected(provider)"
+              class="enable-provider-checkbox"
+              :class="{ [`${provider}`]: true }"
               :label="provider !== 'COGNITO' ? provider : 'Email and Password'"
               >
               </v-checkbox>
