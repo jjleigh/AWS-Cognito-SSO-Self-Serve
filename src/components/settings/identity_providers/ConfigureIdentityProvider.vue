@@ -29,7 +29,7 @@
           label="Metadata URL"
         ></v-text-field>
         <v-btn
-          class="me-4"
+          class="me-4 submit-button"
           color="info"
           type="submit"
         >
