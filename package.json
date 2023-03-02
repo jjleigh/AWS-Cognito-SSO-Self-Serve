@@ -25,9 +25,9 @@
     "font-awesome": "^4.7.0",
     "ramda": "^0.28.0",
     "toastr": "^2.1.4",
-    "vue": "^3.2.36",
+    "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vuetify": "^3.1.4",
+    "vuetify": "^3.1.7",
     "vuex": "^4.1.0",
     "vuex-router-sync": "^5.0.0"
   },
