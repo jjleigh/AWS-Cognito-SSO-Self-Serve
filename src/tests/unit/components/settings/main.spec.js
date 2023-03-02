@@ -1,4 +1,4 @@
-import { shallowMount, mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import Main from '../../../../components/settings/Main.vue';
 
 describe('Main.vue', () => {

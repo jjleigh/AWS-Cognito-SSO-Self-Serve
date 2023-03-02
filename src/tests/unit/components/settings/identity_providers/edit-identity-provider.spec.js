@@ -50,7 +50,7 @@ describe('EditIdentityProvider', () => {
   //     },
   //   });
 
-  //   wrapper.find('.metadata-url').setValue('https://example.com');
+  //   wrapper.find('.metadata-url input').setValue('https://example.com');
 
   //   console.log(wrapper.html());
 

@@ -31,7 +31,6 @@ describe('IdentityProviderListing', () => {
   });
 
 //   it('emits a delete event when delete button is clicked', async() => {
-//     wrapper.setData({ dialog: false });
 //     const openDeleteModalButton = wrapper.find('.open-delete-modal-button');
   
 //     expect(wrapper.find('.delete-dialog').exists()).toBeFalsy();
