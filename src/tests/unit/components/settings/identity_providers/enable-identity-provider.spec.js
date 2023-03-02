@@ -54,27 +54,27 @@ describe('EnableIdentityProvider.vue', () => {
         });
     });
 
-    // it('checks "Select All" when all providers are selected', async () => {
-    //     const checkboxes = wrapper.findAll('.enable-provider-checkbox');
-    //     // const azureCheckbox = wrapper.find('.Azure')
-    //     const azureCheckbox = wrapper.find('[data-test="Azure AD"]')
-    //     const selectAllCheckbox = checkboxes.at(0)
+    it('checks "Select All" when all providers are selected', async () => {
+        const checkboxes = wrapper.findAll('.enable-provider-checkbox');
+        // const azureCheckbox = wrapper.find('.Azure')
+        const azureCheckbox = wrapper.find('[data-test="Azure AD"]')
+        const selectAllCheckbox = checkboxes.at(0)
 
-    //     // console.log(selectAllCheckbox.html());
-    //     console.log(azureCheckbox.html());
+        // console.log(selectAllCheckbox.html());
+        console.log(azureCheckbox.html());
         
-    //     expect(selectAllCheckbox.attributes('checked')).toBeFalsy();
-    //     expect(azureCheckbox.attributes('checked')).toBe('false');
+        expect(selectAllCheckbox.attributes('checked')).toBeFalsy();
+        expect(azureCheckbox.attributes('checked')).toBe('false');
 
-    //     azureCheckbox.setChecked();
+        azureCheckbox.setChecked();
 
-    //     console.log('second check');
-    //     console.log(selectAllCheckbox.html());
-    //     console.log(azureCheckbox.html());
+        console.log('second check');
+        console.log(selectAllCheckbox.html());
+        console.log(azureCheckbox.html());
 
-    //     expect(azureCheckbox.attributes('checked')).toBe('true');
-    //     // expect(selectAllCheckbox.attributes('checked')).toBeTruthy();
-    // });
+        expect(azureCheckbox.attributes('checked')).toBe('true');
+        // expect(selectAllCheckbox.attributes('checked')).toBeTruthy();
+    });
 
     // it('unchecks "Select All" when a provider is deselected', async () => {
     //     wrapper = shallowMount(EnableIdentityProvider, {
