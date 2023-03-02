@@ -15,6 +15,7 @@
           <form @submit.prevent="updateClient">
             <div class="mr-25" v-for="provider in configuredProviders" :key="provider" style="display: inline-block">
               <v-checkbox
+              :data-test="`${provider}`"
               :value="provider"
               v-model="selectedProviders"
               :checked="isSelected(provider)"
