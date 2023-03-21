@@ -19,7 +19,21 @@ Will continute to update this. First starting with the UI and the related infras
 
 ## Deployment
 
- TBD
+```
+$ cd cdk-infra
+```
+
+```
+$ npm install
+```
+
+```
+$ cdk bootstrap
+```
+
+```
+$ cdk deploy
+```
 
 ## UI
 
