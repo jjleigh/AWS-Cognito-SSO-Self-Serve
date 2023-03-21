@@ -1,0 +1,78 @@
+{
+ "Resources": {
+  "MyBucketF68F3FF0": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "AccessControl": "BucketOwnerFullControl",
+    "BucketName": "aws-cognito-self-service-sso-ui-dev",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "WebsiteConfiguration": {
+     "IndexDocument": "index.html"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "AWSCognitoSelfServiceSSOStack/MyBucket/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSM7PUM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFFxvrVTuVJmenlug4p+VBWLUgpn9pSUEpWDAotTi/tCg5tVYnLz8lVS+rWL/M0ELP0EjPUDGrODNTt6g0ryQzN1UvCEIDAPBZerpwAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AWSCognitoSelfServiceSSOStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "exampleBucketArn": {
+   "Value": {
+    "Fn::GetAtt": [
+     "MyBucketF68F3FF0",
+     "Arn"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
