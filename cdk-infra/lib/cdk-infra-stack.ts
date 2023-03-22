@@ -29,11 +29,16 @@ export class CDKInfraStack extends Stack {
       websiteIndexDocument: 'index.html',
     });
 
-    const originAccessIdentity = new cloudfront.OriginAccessIdentity(this, "uiDeploymentBucketOAI", {
+    const originAccessIdentity = new cloudfront.OriginAccessIdentity(this, "UIDeploymentBucketOAI", {
       comment: "UI-DeploymentBucket-OAI"
     });
     uiBucket.grantRead(originAccessIdentity);
 
+    new ssm.StringParameter(this, 'uiDeploymentBucketNameParam', {
+      description: 'Name of the deployment Bucket',
+      parameterName: `/${prefix}/bucket/uiDeploymentBucketName`,
+      stringValue: uiBucket.bucketName
+    });
 
     /**************************************************************
      * CLOUDFRONT DISTRIBUTION 
@@ -73,6 +78,7 @@ export class CDKInfraStack extends Stack {
     **************************************************************/
 
     new CfnOutput(this, 'BucketArn', { value: uiBucket.bucketArn });
+    new CfnOutput(this, "UIDeploymentBucketName", { value: uiBucket.bucketName});
     new CfnOutput(this, "cloudFrontUrl", { value: `https://${cloudFrontWebDistribution.distributionDomainName}`});
     new CfnOutput(this, "cloudFrontDistributionId", { value: cloudFrontWebDistribution.distributionId});
   }
