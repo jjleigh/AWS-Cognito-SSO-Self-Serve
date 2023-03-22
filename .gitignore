@@ -1,4 +1,12 @@
 .DS_Store
 node_modules/
+
 cdk-infra/cdk.out/
+
+cdk-infra/bin/stack.js
+cdk-infra/bin/stack.d.ts
+
+cdk-infra/lib/cdk-infra-stack.d.ts
+cdk-infra/lib/cdk-infra-stack.js
+
 dist/
