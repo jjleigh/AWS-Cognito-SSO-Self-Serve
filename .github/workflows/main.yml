@@ -36,6 +36,10 @@ jobs:
         npm list
 
     - name: Print env
+      env:
+        STACK_NAME: ${{ vars.STACK_NAME }}
+        ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
+        AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
         env
     
