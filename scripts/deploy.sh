@@ -20,7 +20,7 @@ pwd
 sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
 
 # Replace AWS_REGION placeholder with Github env variable value
-sed -i "s/<AWS_REGION>/$AWS_REGION/g" ./cdk.json
+sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
 
 # Install Dependencies
 echo "===> Building CDK project..."

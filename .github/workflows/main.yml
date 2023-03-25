@@ -23,11 +23,10 @@ jobs:
       with:
         node-version: '18.x'
     - name: Deploy Infrastructure
-      uses: youyo/aws-cdk-github-actions@v2
       if: needs.test.result == 'success'
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ vars.REGION }}
+        AWS_DEFAULT_REGION: ${{ vars.REGION }}
         ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
       run: ./scripts/deploy.sh
