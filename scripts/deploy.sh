@@ -20,6 +20,11 @@ pwd
 echo "===> Building CDK project..."
 npm install
 
+
+# Install AWS CDK
+echo "===> Installing CDK..."
+npm install -g aws-cdk
+
 # Synth
 # echo "===> Running CDK synth..."
 # cdk synth
