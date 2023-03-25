@@ -43,12 +43,9 @@ jobs:
       run: |
         env
     - name: Print env variables
-      env:
-        STACK_NAME: ${{ vars.STACK_NAME }}
-        AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
-        echo "STACK_NAME: " $STACK_NAME
-        echo "AWS_DEFAULT_REGION: " $REGION
+        echo "STACK_NAME:  ${{ vars.Dev.STACK_NAME }}"
+        echo "AWS_DEFAULT_REGION:  ${{ vars.Dev.REGION }}"
         echo "ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}" 
         cat ./cdk.json
 
