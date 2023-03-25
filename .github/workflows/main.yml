@@ -13,6 +13,13 @@ jobs:
       run: npm install --legacy-peer-deps
     - name: Run Jest
       run: npm run test
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     - name: Deploy Infrastructure
-      if: steps.jest.outcome == 'success'
-      run: scripts/deploy.sh
+      if: needs.build.result == 'success'
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: ../scripts/deploy.sh
