@@ -12,6 +12,10 @@ SSM_ROOT="self-service-sso"
 echo "===> Changing directory..."
 cd ./cdk-infra
 
+# Current directory
+echo "===> Current directory"
+pwd
+
 # Install Dependencies
 echo "===> Building CDK project..."
 npm install
@@ -19,6 +23,10 @@ npm install
 # Synth
 # echo "===> Running CDK synth..."
 # cdk synth
+
+# npm packages
+echo "===> Listing npm packages"
+npm list
 
 # Bootstraping
 echo "===> Bootstraping account"
