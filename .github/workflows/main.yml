@@ -20,7 +20,7 @@ jobs:
       run:
         working-directory: ./cdk-intra
     steps:
-     - name: Install dependencies
+    - name: Install dependencies
       run: |
         echo "===> Installing CDK project..."
         npm install
