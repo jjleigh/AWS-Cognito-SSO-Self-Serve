@@ -40,9 +40,12 @@ jobs:
         echo "STACK_NAME: ${{ vars.STACK_NAME }}"
         echo "AWS_DEFAULT_REGION: ${{ vars.REGION }}"
         echo "ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}"
-        echo "STACK_NAME: ${{ env.STACK_NAME }}"
-        echo "AWS_DEFAULT_REGION: ${{ env.REGION }}"
-        echo "ACCOUNT_ID: ${{ env.ACCOUNT_ID }}"
+        echo "STACK_NAME: $STACK_NAME"
+        echo "AWS_DEFAULT_REGION: $REGION"
+        echo "ACCOUNT_ID: $ACCOUNT_ID"
+        echo "STACK_NAME: " $STACK_NAME
+        echo "AWS_DEFAULT_REGION: " $REGION
+        echo "ACCOUNT_ID: " $ACCOUNT_ID
         cat ./cdk.json
 
     - name: Replace placeholders with Github env variable value
