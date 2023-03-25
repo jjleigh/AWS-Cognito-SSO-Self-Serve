@@ -21,19 +21,13 @@ jobs:
       run: |
         echo "===> Current directory"
         pwd
-        echo "===> Changing directory..."
-        ls ./
-        echo "===> Changing directory..."
-        ls ../
-        echo "===> Changing directory..."
-        ls ../../
-        echo "===> Changing directory..."
-        ls ../../../
+        echo "===> ls directory..."
+        ls ../cdk-infra
 
     - name: Replace placeholders with Github env variable value
       run: |
-        sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
-        sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
+        sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ../cdk-infra/cdk.json
+        sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ../cdk-infra/cdk.json
 
     - name: Install dependencies
       run: |
