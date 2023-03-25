@@ -16,16 +16,20 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cdk-intra
     steps:
-    - name: Change to cdk directory
+     - name: Install dependencies
       run: |
-        echo "===> Current directory"
-        pwd
-        echo "===> ls directory..."
-        ls ../cdk-infra
+        echo "===> Installing CDK project..."
+        npm install
+        echo "===> Installing CDK globally..."
+        npm install -g aws-cdk
+        echo "===> Listing npm packages"
+        npm list
 
     - name: Replace placeholders with Github env variable value
       run: |
-        sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ../cdk-infra/cdk.json
-        sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ../cdk-infra/cdk.json
-        
+        sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
+        sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
