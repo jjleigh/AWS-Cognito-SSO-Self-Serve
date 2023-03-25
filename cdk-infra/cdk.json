@@ -31,7 +31,7 @@
       "ENVIRONMENTS": {
         "dev": {
           "AccountId":"<ACCOUNT_ID>",
-          "Region":"us-east-1",
+          "Region":"<AWS_REGION>",
           "Stage": "dev",
           "Prefix":"self-service-sso",
           "ApplicationVersion": "1.0.0"
