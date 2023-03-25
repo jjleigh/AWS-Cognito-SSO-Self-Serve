@@ -16,17 +16,23 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '18.x'
-    - name: Deploy Infrastructure
-      if: needs.test.result == 'success'
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: ${{ vars.REGION }}
-        ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
-      run: ./scripts/deploy.sh
+    - name: Change to cdk directory
+      run: |
+        echo "===> Current directory"
+        pwd
+        echo "===> Changing directory..."
+        cd ./cdk-infra
+
+    - name: Replace placeholders with Github env variable value
+      run: |
+        sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
+        sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
+
+     - name: Install dependencies
+      run: |
+        echo "===> Installing CDK project..."
+        npm install
+        echo "===> Installing CDK globally..."
+        npm install -g aws-cdk
+        echo "===> Listing npm packages"
+        npm list
