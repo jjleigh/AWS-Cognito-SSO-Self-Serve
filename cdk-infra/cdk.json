@@ -30,10 +30,10 @@
       ],
       "ENVIRONMENTS": {
         "dev": {
-          "AccountId":"",
+          "AccountId":"<ACCOUNT_ID>",
           "Region":"us-east-1",
           "Stage": "dev",
-          "Prefix":"aws-cognito-self-service-sso",
+          "Prefix":"self-service-sso",
           "ApplicationVersion": "1.0.0"
         }
       }

@@ -16,10 +16,12 @@ cd ./cdk-infra
 echo "===> Current directory"
 pwd
 
+# Replace ACCOUNT_ID placeholder with Github env variable value
+sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
+
 # Install Dependencies
 echo "===> Building CDK project..."
 npm install
-
 
 # Install AWS CDK
 echo "===> Installing CDK..."
