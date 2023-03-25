@@ -45,7 +45,8 @@ jobs:
       with:
         cdk_subcommand: 'diff'
         cdk_stack: ${{ vars.STACK_NAME }}
-        cdk_args: 'node_modules/.bin/ts-node bin/stack.ts --app ${{ vars.STACK_NAME }}'
+        cdk_args: 'npx ts-node --prefer-ts-exts bin/stack.ts'
+        app: ${{ vars.STACK_NAME }}
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
