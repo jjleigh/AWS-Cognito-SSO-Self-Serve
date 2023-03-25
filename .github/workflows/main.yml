@@ -35,6 +35,14 @@ jobs:
         echo "===> Listing npm packages"
         npm list
 
+    - name: Print env
+      run: |
+        env
+    
+    - name: Print vars
+      run: |
+        echo "vars: ${{ vars }}"
+
     - name: Print env variables
       env:
         STACK_NAME: ${{ vars.STACK_NAME }}
