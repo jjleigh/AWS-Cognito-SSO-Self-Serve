@@ -44,7 +44,8 @@ jobs:
       uses: youyo/aws-cdk-github-actions@v2
       with:
         cdk_subcommand: 'diff'
-        cdk_args: '--app ./bin/stack.ts'
+        cdk_stack: 
+        cdk_args: 'npx ts-node --prefer-ts-exts ./bin/stack.ts --app ${{ vars.STACK_NAME }}'
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
