@@ -36,6 +36,10 @@ jobs:
         npm list
 
     - name: Print env variables
+      env:
+        STACK_NAME: ${{ vars.STACK_NAME }}
+        ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
+        AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
         echo "STACK_NAME: ${{ vars.STACK_NAME }}"
         echo "AWS_DEFAULT_REGION: ${{ vars.REGION }}"
@@ -49,6 +53,10 @@ jobs:
         cat ./cdk.json
 
     - name: Replace placeholders with Github env variable value
+      env:
+        STACK_NAME: ${{ vars.STACK_NAME }}
+        ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
+        AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
         sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
         sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
