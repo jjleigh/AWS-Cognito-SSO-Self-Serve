@@ -35,19 +35,11 @@ jobs:
         echo "===> Listing npm packages"
         npm list
 
-    - name: Print env
-      env:
-        STACK_NAME: ${{ vars.STACK_NAME }}
-        ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
-        AWS_DEFAULT_REGION: ${{ vars.REGION }}
-      run: |
-        env
     - name: Print env variables
       run: |
-        echo "STACK_NAME:  ${{ vars.dev.STACK_NAME }}"
-        echo "AWS_DEFAULT_REGION:  ${{ vars.dev.REGION }}"
+        echo "STACK_NAME:  ${{ vars.STACK_NAME }}"
+        echo "AWS_DEFAULT_REGION:  ${{ vars.REGION }}"
         echo "ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}" 
-        cat ./cdk.json
 
     - name: Replace placeholders with Github env variable value
       env:
