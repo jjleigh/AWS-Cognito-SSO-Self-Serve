@@ -38,6 +38,10 @@ npm install -g aws-cdk
 echo "===> Listing npm packages"
 npm list
 
+# CDK Diff
+echo "===> diff"
+cdk diff
+
 # Bootstraping
 echo "===> Bootstraping account"
 cdk bootstrap
