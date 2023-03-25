@@ -48,4 +48,4 @@ jobs:
         AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
         echo "===> cdk diff"
-        npx dk diff
+        npx cdk diff
