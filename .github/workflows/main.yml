@@ -22,7 +22,13 @@ jobs:
         echo "===> Current directory"
         pwd
         echo "===> Changing directory..."
-        cd ./cdk-infra
+        ls ./
+        echo "===> Changing directory..."
+        ls ../
+        echo "===> Changing directory..."
+        ls ../../
+        echo "===> Changing directory..."
+        ls ../../../
 
     - name: Replace placeholders with Github env variable value
       run: |
