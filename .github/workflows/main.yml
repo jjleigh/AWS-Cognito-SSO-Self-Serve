@@ -21,6 +21,8 @@ jobs:
       run: |
         echo "===> pwd"
         pwd
+        echo "===> ls"
+        ls
         echo "===> Installing CDK project..."
         npm install
         echo "===> Installing CDK globally..."
