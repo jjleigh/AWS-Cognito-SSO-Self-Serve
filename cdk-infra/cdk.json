@@ -2,7 +2,10 @@
     "app": "npx ts-node --prefer-ts-exts bin/stack.ts",
     "watch": {
       "include": [
-        "**"
+        "bin",
+        "lib",
+        "cdk.json",
+        "package.json"
       ],
       "exclude": [
         "cdk*.json",
