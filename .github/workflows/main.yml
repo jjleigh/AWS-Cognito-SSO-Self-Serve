@@ -16,6 +16,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    steps:
     - name: Change to cdk directory
       run: |
         echo "===> Current directory"
@@ -28,7 +29,7 @@ jobs:
         sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
         sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
 
-     - name: Install dependencies
+    - name: Install dependencies
       run: |
         echo "===> Installing CDK project..."
         npm install
