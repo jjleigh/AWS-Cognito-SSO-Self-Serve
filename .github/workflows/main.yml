@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./cdk-infra
+        working-directory: cdk-infra
     steps:
     - name: Install dependencies
       run: |
