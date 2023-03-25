@@ -39,3 +39,12 @@ jobs:
       run: |
         sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
         sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
+    
+    - name: cdk diff
+      uses: youyo/aws-cdk-github-actions@v2
+      with:
+        cdk_subcommand: 'diff'
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ vars.REGION }}
