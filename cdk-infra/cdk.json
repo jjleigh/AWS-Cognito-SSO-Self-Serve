@@ -1,5 +1,5 @@
 {
-    "app": "npx ts-node --prefer-ts-exts bin/stack.ts --app AWSCognitoSelfServiceSSOStack",
+    "app": "npx ts-node --prefer-ts-exts bin/stack.ts --app <STACK_NAME>",
     "watch": {
       "include": [
         "bin",
