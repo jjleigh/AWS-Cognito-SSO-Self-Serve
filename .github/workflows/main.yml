@@ -45,16 +45,6 @@ jobs:
         sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
         sed -i "s/<STACK_NAME>/$STACK_NAME/g" ./cdk.json
         cat ./cdk.json
-
-    - name: Test1
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: ${{ vars.REGION }}
-      run: |
-        echo "===> Test1"
-        echo "Test1: ${{ secrets.AWS_ACCESS_KEY_ID }}"
-
     
     - name: cdk diff
       env:
