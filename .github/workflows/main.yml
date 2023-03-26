@@ -53,7 +53,7 @@ jobs:
         AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
         echo "===> Test1"
-        echo "Test1: ${{ secrets.AWS_ACCESS_KEY_ID }}""
+        echo "Test1: ${{ secrets.AWS_ACCESS_KEY_ID }}"
 
     
     - name: cdk diff
