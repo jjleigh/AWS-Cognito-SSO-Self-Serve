@@ -45,7 +45,7 @@ jobs:
         sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
         sed -i "s/<STACK_NAME>/$STACK_NAME/g" ./cdk.json
 
-     - name: Configure AWS Credentials
+    - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
