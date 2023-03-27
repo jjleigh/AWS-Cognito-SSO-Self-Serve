@@ -19,21 +19,32 @@ Will continute to update this. First starting with the UI and the related infras
 
 ## Deployment
 
-```
-$ cd cdk-infra
-```
+Deploymets are handled by Github actions `.github/workflows` directory. 
 
-```
-$ npm install
-```
+#### Requirements
 
-```
-$ cdk bootstrap
-```
+The Github action needs to configure AWS and update the cdk.json file with required env variables
 
-```
-$ cdk deploy
-```
+1. In the AWS IAM console create a user that can be used for the action
+
+2. create a credential for this user and copy the credentials and create secret env variables for your github repo. In this case I used repository secrets rather than environment secrents since I only have a dev env.
+
+`AWS_ACCESS_KEY_ID`
+
+`AWS_SECRET_ACCESS_KEY`
+
+3. Create the following repo variables.
+
+`STACK_NAME`
+
+`REGION`
+
+`ACCOUNT_ID`
+
+
+stack name can be found by calling `cdk list` and the others in your AWS account
+
+When you push changes the actions to run test and deploy will run automatically.
 
 ## UI
 
