@@ -99,6 +99,16 @@ jobs:
         AWS_DEFAULT_REGION: ${{ vars.REGION }}
         SSM_ROOT: ${{ vars.PREFIX }}
       run: |
-        echo "===> Fetching cloudfront distribution url /$SSM_ROOT/cloudfront/distributionUrl..."
+        echo "===> Fetching cloudfront distribution url /$SSM_ROOT/cloudfront/distributionUrl"
         CF_DISTRIBUTION_URL=`aws ssm get-parameters --with-decryption --names "/$SSM_ROOT/cloudfront/distributionUrl" --query 'Parameters[*].Value' --output text`
-        echo "===> Fetched cloudfront distribution url ${CF_DISTRIBUTION_URL}..."
+        echo "===> Fetched cloudfront distribution url ${CF_DISTRIBUTION_URL}"
+        echo "===> Fetching bucket /${SSM_ROOT}/bucket/uiDeploymentBucketName..."
+        DEPLOYMENT_BUCKET=`aws ssm get-parameters --with-decryption --names "/${SSM_ROOT}/bucket/uiDeploymentBucketName"  --query 'Parameters[*].Value' --output text`
+        echo "===> Copying build archifacts to S3 bucket: ${DEPLOYMENT_BUCKET}..."
+        aws s3 sync ./dist s3://${DEPLOYMENT_BUCKET}/build
+        CF_DISTRIBUTION_ID=`aws ssm get-parameters --with-decryption --names "/$SSM_ROOT/cloudfront/distributionId" --query 'Parameters[*].Value' --output text`
+        echo "===> Invalidating cloud formation distribution: ${CF_DISTRIBUTION_ID}"
+        aws cloudfront create-invalidation \
+            --distribution-id ${CF_DISTRIBUTION_ID} \
+            --paths "/*"
+
