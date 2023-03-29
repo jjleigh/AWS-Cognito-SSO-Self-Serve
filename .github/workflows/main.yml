@@ -90,4 +90,15 @@ jobs:
         echo "===> Building UI App..."
         npm run build
         echo "===> Building UI Project is done."
-            
+
+    - name: Deploy UI
+      working-directory: ./
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ vars.REGION }}
+        SSM_ROOT: ${{ vars.PREFIX }}
+      run: |
+        echo "===> Fetching cloudfront distribution url /$SSM_ROOT/cloudfront/distributionUrl..."
+        CF_DISTRIBUTION_URL=`aws ssm get-parameters --with-decryption --names "/$SSM_ROOT/cloudfront/distributionUrl" --query 'Parameters[*].Value' --output text`
+        echo "===> Fetched cloudfront distribution url ${CF_DISTRIBUTION_URL}..."
