@@ -39,11 +39,13 @@ jobs:
       env:
         STACK_NAME: ${{ vars.STACK_NAME }}
         ACCOUNT_ID: ${{ vars.ACCOUNT_ID }}
+        PREFIX: ${{ vars.PREFIX }}
         AWS_DEFAULT_REGION: ${{ vars.REGION }}
       run: |
         sed -i "s/<ACCOUNT_ID>/$ACCOUNT_ID/g" ./cdk.json
         sed -i "s/<AWS_REGION>/$AWS_DEFAULT_REGION/g" ./cdk.json
         sed -i "s/<STACK_NAME>/$STACK_NAME/g" ./cdk.json
+        sed -i "s/<PREFIX>/$PREFIX/g" ./cdk.json
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -88,3 +90,4 @@ jobs:
         echo "===> Building UI App..."
         npm run build
         echo "===> Building UI Project is done."
+            

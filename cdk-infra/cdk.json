@@ -36,7 +36,7 @@
           "AccountId":"<ACCOUNT_ID>",
           "Region":"<AWS_REGION>",
           "Stage": "dev",
-          "Prefix":"self-service-sso",
+          "Prefix":"<PREFIX>",
           "ApplicationVersion": "1.0.0"
         }
       }
