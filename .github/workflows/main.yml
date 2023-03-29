@@ -79,7 +79,7 @@ jobs:
         echo "===> cdk synth"
         npx cdk synth
 
-     - name: Build UI
+    - name: Build UI
       run: |
         echo "===> Switching directroy to main"
         cd ../src
