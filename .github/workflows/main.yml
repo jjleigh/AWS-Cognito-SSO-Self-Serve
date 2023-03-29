@@ -80,9 +80,8 @@ jobs:
         npx cdk synth
 
     - name: Build UI
+      working-directory: ./src
       run: |
-        echo "===> Switching directroy to main"
-        cd ../src
         pwd
         echo "===> Installing UI App dependencies..."
         npm install --force --silent
