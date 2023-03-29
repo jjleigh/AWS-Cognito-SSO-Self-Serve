@@ -11,6 +11,7 @@ import '@mdi/font/css/materialdesignicons.css';
 
 import Main from './components/settings/Main';
 import Home from './components/Home';
+import Dashboard from './components/admin/Dashboard';
 
 const router = new createRouter({
   history: createWebHistory(),
@@ -22,6 +23,10 @@ const router = new createRouter({
     {
       path: '/settings',
       component: Main,
+    },
+    {
+      path: '/admin',
+      component: Dashboard,
     }
   ],
 });

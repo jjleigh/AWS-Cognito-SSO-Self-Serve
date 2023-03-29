@@ -32,14 +32,15 @@ export default {
   data: () => ({
     drawer: false,
     items: [
-      { title: 'Settings', to: {path: '/settings'}}
+      { title: 'Settings', to: {path: '/settings'}},
+      { title: 'Admin', to: {path: '/admin'}}
     ],
   }),
   watch: {
     group () {
       this.drawer = false
     },
-  }
+  },
 }
 </script>
 
