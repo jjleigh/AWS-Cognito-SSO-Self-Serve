@@ -78,3 +78,14 @@ jobs:
       run: |
         echo "===> cdk synth"
         npx cdk synth
+
+     - name: Build UI
+      run: |
+        echo "===> Switching directroy to main"
+        cd ../src
+        pwd
+        echo "===> Installing UI App dependencies..."
+        npm install --force --silent
+        echo "===> Building UI App..."
+        npm run build
+        echo "===> Building UI Project is done."
